@@ -1,9 +1,8 @@
 # ML Algorithms
 Algorithms related to Machine Learning implemented from **Scratch**
 
-:heavy_check_mark: - Done
-
-:radio_button: - In Progress
+| :heavy_check_mark: | Done | :radio_button: | In Progress |
+| :------------:| :----:| :------------:| :----:|
 
 | ML Algorithms | Status |
 | :------------:| :----:| 
@@ -16,6 +15,7 @@ Convert to Jupyter Notebook after implementing in `.py` python file as follows
 ```commandline
 jupytext --to notebook logistic_regression.py
 ```
+Open generated `.ipynb` in Jupyter Notebook and run all cells before committing 
 
 ### Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contributions.
