@@ -71,7 +71,7 @@ def gradient_reg(theta, X, y):
     delta = error_value_final / m
     delta_reg = (lambda_value / m) * theta.reshape(-1, 1).T
     delta_reg[0] = 0
-    delta_total = np.multiply((delta + delta_reg), (alpha/m))
+    delta_total = np.multiply((delta + delta_reg), (alpha / m))
     grad = delta_total.flatten()
     return grad.flatten()
 
@@ -83,6 +83,11 @@ def custom_optimizer(theta, X, y, iterations):
         theta = theta - gradient_reg(theta, X, y)
         cost_history.append(compute_cost_reg(theta, X, y))
     return [theta, np.column_stack((iteration_array, np.asarray(cost_history)))]
+
+
+def predict(theta, X, threshold=0.5):
+    p = sigmoid(X.dot(theta.T)) >= threshold
+    return p.astype('int')
 
 
 # ## Tests with few lambda values
@@ -113,21 +118,11 @@ theta_value = np.zeros(X_train_mapped.shape[1])
 result_theta, cost_history = custom_optimizer(theta_value, X_train_mapped, y_train, 400)
 print(result_theta)
 
-prediction = sigmoid(np.dot(X_train_mapped, result_theta))
-counter = 0
-for i in range(prediction.shape[0]):
-    predicted = 0
-    if prediction[i] >= 0.5:
-        predicted = 1
-    if predicted == y_train[i]:
-        counter += 1
-
-accuracy = (counter / y_train.shape[0]) * 100
+accuracy = 100 * sum(predict(result_theta, X_train_mapped) == y_train.ravel()) / y_train.size
 print(accuracy)
 
 # ## Cost Function
 
-print(cost_history)
 plt.plot(cost_history)
 plt.xlabel("Iteration")
 plt.ylabel("Cost")
