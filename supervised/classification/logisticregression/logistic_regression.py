@@ -1,13 +1,19 @@
+# # Logistic Regression using Gradient Descent
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Import Data Set
+# ## Import Data Set
 
 train_data = pd.read_csv('micro_data_train.csv')
+
 train_data.head()
+
 train_data.info()
+
 train_data.describe()
+
 test_data = pd.read_csv('micro_data_test.csv')
 test_data.head()
 
@@ -18,9 +24,9 @@ plt.scatter(train_data_0.iloc[:, 0], train_data_0.iloc[:, 1], marker='o', color=
 plt.xlabel('Micro Test 1')
 plt.ylabel('Micro Test 2')
 plt.legend(labels=['Accepted', 'Rejected'])
-# plt.show()
+plt.show()
 
-# Feature Separation and Normalization
+# ## Feature Separation and Normalization
 
 X_train = train_data.iloc[:, :-1].values
 y_train = train_data.iloc[:, -1:].values
@@ -45,7 +51,7 @@ X_train_mapped = map_features(X_train[:, 0], X_train[:, 1])
 X_test_mapped = map_features(X_test[:, 0], X_test[:, 1])
 
 
-# Gradient Descent
+# ## Gradient Descent
 
 def sigmoid(input_var):
     sigmoid_result = 1 / (1 + np.exp(-input_var))
